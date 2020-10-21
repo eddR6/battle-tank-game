@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TankService : MonoSingletonGeneric<TankService>
 {
+    public Joystick joystick;
+
     [Header("Player Tank Object")]
     public GameObject playerTank;
     protected override void Awake()
@@ -12,8 +14,11 @@ public class TankService : MonoSingletonGeneric<TankService>
         TankService.Instance.GetTank();
     }
 
-    public void GetTank()
+    public TankController GetTank()
     {
         Instantiate(playerTank, Vector3.zero, Quaternion.identity);
+        TankController tankController = playerTank.GetComponent<TankController>();
+        tankController.joystick = joystick;
+        return tankController;
     }
 }

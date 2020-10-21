@@ -241,6 +241,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
+--- !u!114 &168488148 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8170153791668043265, guid: 0d230cc8be529a542a08cb878ab14b18,
+    type: 3}
+  m_PrefabInstance: {fileID: 168488146}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a47f546fc70ec8428172694e78e4288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &734051886
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,7 +509,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 8ce5d020a687c314891341b4126d1de2, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0
+  m_Volume: 0.17
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -717,6 +729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9e62a678cd0f7e44b094d87bdb4bc17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  joystick: {fileID: 168488148}
   playerTank: {fileID: 5736283964451558726, guid: 9dc648e6388b771488274c324014aab4,
     type: 3}
 --- !u!4 &1656915003

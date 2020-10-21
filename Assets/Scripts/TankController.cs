@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class TankController : MonoBehaviour
 {
-
-    [Header("Joystick Prefab")]
     public Joystick joystick;
 
     public float speed;
     public float rotationSpeed;
-    void Start()
-    {
-        joystick = GameObject.Find("Floating Joystick").GetComponent<FloatingJoystick>();   
-    }
+
     void Update()
     {
         Movement();    
