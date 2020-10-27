@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bd9d0d0f4d891a449941172482a8c7c, type: 3}
+  m_Name: Enemy Tanks
+  m_EditorClassIdentifier: 
+  tankConfigurations:
+  - {fileID: 11400000, guid: 86ee039d18b5e52499382ae9514fabc4, type: 2}
+  - {fileID: 11400000, guid: 9023bd0ff34527e4a814ffa49d52ed6c, type: 2}
+  - {fileID: 11400000, guid: 35a3cee478e347440926ddb73a9dad1a, type: 2}
+  - {fileID: 11400000, guid: fd075c9704370e24da9716b1fb604241, type: 2}
+  - {fileID: 11400000, guid: 4a2e7988b4e15194b968a13644887205, type: 2}
