@@ -6,11 +6,13 @@ public class TankController : MonoBehaviour
 {
     public Joystick joystick;
 
-    public float speed;
-    public float rotationSpeed=150;
-    public int health;
-    public int attack;
-    public TankColor tankColor;
+    private float speed;
+    private float rotationSpeed=150;
+    private int health;
+    private int attack;
+    private TankColor tankColor;
+    [SerializeField]
+    private Transform muzzleTransform;
 
     public void SetBaseValues(TankScriptableObjects configs)
     {
@@ -41,7 +43,8 @@ public class TankController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            BulletManager.Instance.LaunchBullet(transform, attack);
+            BulletController bulletController = BulletManager.Instance.LaunchBullet(muzzleTransform);
+            bulletController.damage = attack;
         }
     }
     public void TakeDamage(int damage)

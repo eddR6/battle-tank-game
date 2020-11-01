@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public float speed;
-    public float rotationSpeed;
-    public int health;
-    public int attack;
-    public TankColor tankColor;
+    private float speed;
+    private float rotationSpeed;
+    private int health;
+    private int attack;
+    private TankColor tankColor;
+    [Header("Renderer Parts")]
+    [SerializeField]
+    private MeshRenderer[] meshes;
 
     public void SetBaseValues(TankScriptableObjects configs)
     {
@@ -16,7 +19,7 @@ public class EnemyController : MonoBehaviour
         health = configs.health;
         attack = configs.attack;
         tankColor = configs.tankColor;
-        MeshRenderer[] meshes = gameObject.GetComponentsInChildren<MeshRenderer>();
+        
         foreach (MeshRenderer mesh in meshes)
         {
             if (tankColor == TankColor.Blue)

@@ -325,6 +325,11 @@ MonoBehaviour:
   health: 0
   attack: 0
   tankColor: 0
+  meshes:
+  - {fileID: 3553893787129761789}
+  - {fileID: 3553893787129761787}
+  - {fileID: 3553893787129761781}
+  - {fileID: 3553893787129761791}
 --- !u!65 &1527761742
 BoxCollider:
   m_ObjectHideFlags: 0

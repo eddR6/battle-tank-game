@@ -5,16 +5,25 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     public int damage;
+    public float speed;
+
+    private void Start()
+    {
+        Rigidbody rb =gameObject.GetComponent<Rigidbody>();
+        rb.AddForce(transform.forward * speed);
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<EnemyController>())
+        EnemyController enemyController = collision.gameObject.GetComponent<EnemyController>();
+        TankController tankController = collision.gameObject.GetComponent<TankController>();
+        if (enemyController)
         {
-            collision.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
+            enemyController.TakeDamage(damage);
         }
-        else if (collision.gameObject.GetComponent<TankController>())
+        else if (tankController)
         {
-            collision.gameObject.GetComponent<TankController>().TakeDamage(damage);
+            tankController.TakeDamage(damage);
         }
         Destroy(gameObject);
     }

@@ -6,12 +6,16 @@ using UnityEngine.UI;
 public class TankService : MonoSingletonGeneric<TankService>
 {
     public Joystick joystick;
-    public TankConfigurations friendlyTanks;
-    public TankConfigurations enemyTanks;
+    [SerializeField]
+    private TankConfigurations friendlyTanks;
+    [SerializeField]
+    private TankConfigurations enemyTanks;
 
     [Header("Player Tank Object")]
-    public TankController friendlyTankModel;
-    public EnemyController enemyTankModel;
+    [SerializeField]
+    private TankController friendlyTankModel;
+    [SerializeField]
+    private EnemyController enemyTankModel;
 
     protected override void Awake()
     {
