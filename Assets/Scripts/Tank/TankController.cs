@@ -13,6 +13,10 @@ public class TankController : MonoBehaviour
     private TankColor tankColor;
     [SerializeField]
     private Transform muzzleTransform;
+    [SerializeField]
+    private ParticleSystem tankExplosion;
+    [SerializeField]
+    private MeshRenderer[] meshes;
 
     public void SetBaseValues(TankScriptableObjects configs)
     {
@@ -20,7 +24,20 @@ public class TankController : MonoBehaviour
         health = configs.health;
         attack = configs.attack;
         tankColor = configs.tankColor;
-        
+
+        foreach (MeshRenderer mesh in meshes)
+        {
+            if (tankColor == TankColor.Blue)
+            {
+                mesh.material.color = Color.blue;
+            }
+            else if (tankColor == TankColor.Red)
+            {
+                mesh.material.color = Color.red;
+            }
+
+        }
+
     }
 
     void Update()
@@ -52,7 +69,20 @@ public class TankController : MonoBehaviour
         health = health - damage;
         if (health <= 0)
         {
-            Destroy(gameObject);
+            
+            tankExplosion.Play();
+            StartCoroutine(DeathEffect());
+           
         }
+    }
+    IEnumerator DeathEffect()
+    {
+        foreach (MeshRenderer mesh in meshes)
+        {
+            mesh.enabled = false;
+        }
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
+        TankService.Instance.GetFriendlyTank();
     }
 }

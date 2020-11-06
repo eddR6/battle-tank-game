@@ -33,6 +33,14 @@ public class EnemyController : MonoBehaviour
 
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        TankController tankController = collision.gameObject.GetComponent<TankController>();
+        if (tankController != null)
+        {
+            tankController.TakeDamage(100);
+        }
+    }
     public void TakeDamage(int damage)
     {
         health = health - damage;
