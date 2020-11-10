@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e00683185b8b0647accb4280f8e0775, type: 3}
-  m_Name: Enemy Blue Medium
+  m_Script: {fileID: 11500000, guid: 6ce918d515a1ab048a768ac245e44c0a, type: 3}
+  m_Name: Enemy Spawn Points
   m_EditorClassIdentifier: 
-  tankType: 2
-  tankColor: 3
-  speed: 20
-  health: 100
-  attack: 40
+  vectorPoints:
+  - {x: 5, y: 4, z: 16}
+  - {x: 0, y: 4, z: 12}
+  - {x: 8, y: 4, z: -20}
+  - {x: 1, y: 4, z: -21}
+  - {x: 7, y: 4, z: -11}

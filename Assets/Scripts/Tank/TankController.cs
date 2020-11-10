@@ -83,6 +83,8 @@ public class TankController : MonoBehaviour
         }
         yield return new WaitForSeconds(2f);
         Destroy(gameObject);
-        TankService.Instance.GetFriendlyTank();
+        TankController t=TankService.Instance.GetFriendlyTank();
+        t.gameObject.transform.position = new Vector3(1, 2, 0);
+
     }
 }

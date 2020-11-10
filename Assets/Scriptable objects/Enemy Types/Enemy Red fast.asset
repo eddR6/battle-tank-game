@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e00683185b8b0647accb4280f8e0775, type: 3}
   m_Name: Enemy Red fast
   m_EditorClassIdentifier: 
-  tankType: 2
   tankColor: 2
   speed: 40
   health: 40

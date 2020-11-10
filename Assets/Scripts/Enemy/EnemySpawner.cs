@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public Transform[] spawnPoints;
+    public SpawnPoints spawnPoints;
     private int currentSpawn;
 
     void Start()
@@ -23,7 +23,7 @@ public class EnemySpawner : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             EnemyController enemyController=TankService.Instance.GetEnemyTank();
-            enemyController.gameObject.transform.position = spawnPoints[currentSpawn].position;
+            enemyController.gameObject.transform.position = spawnPoints.vectorPoints[currentSpawn];
             currentSpawn++;
         }
     }
