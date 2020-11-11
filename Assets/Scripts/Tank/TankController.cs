@@ -52,7 +52,7 @@ public class TankController : MonoBehaviour
        
         //float vertical = Input.GetAxis("Vertical");
        // float horizontal = Input.GetAxis("Horizontal");
-        Debug.Log(vertical + " " + horizontal);
+        //Debug.Log(vertical + " " + horizontal);
         transform.position = transform.position + transform.forward*speed * vertical * Time.deltaTime;
         transform.Rotate(Vector3.up*rotationSpeed*Time.deltaTime*horizontal);
     }
@@ -64,12 +64,19 @@ public class TankController : MonoBehaviour
             bulletController.damage = attack;
         }
     }
+    public void ToggleMesh(bool toggle)
+    {
+        foreach (MeshRenderer mesh in meshes)
+         {
+            mesh.enabled = toggle;
+         }
+    }
     public void TakeDamage(int damage)
     {
         health = health - damage;
         if (health <= 0)
         {
-            
+            ToggleMesh(false);
             tankExplosion.Play();
             StartCoroutine(DeathEffect());
            
@@ -77,14 +84,7 @@ public class TankController : MonoBehaviour
     }
     IEnumerator DeathEffect()
     {
-        foreach (MeshRenderer mesh in meshes)
-        {
-            mesh.enabled = false;
-        }
         yield return new WaitForSeconds(2f);
-        Destroy(gameObject);
-        TankController t=TankService.Instance.GetFriendlyTank();
-        t.gameObject.transform.position = new Vector3(1, 2, 0);
-
+        TankSpawner.RespawnTank(this);
     }
 }

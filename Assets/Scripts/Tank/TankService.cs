@@ -28,7 +28,7 @@ public class TankService : MonoSingletonGeneric<TankService>
 
     public TankController GetFriendlyTank()
     {
-        TankController tankController = Instantiate<TankController>(friendlyTankModel, Vector3.zero, Quaternion.identity);
+        TankController tankController = Instantiate<TankController>(friendlyTankModel, new Vector3(-25,0,0), Quaternion.identity);
         tankController.joystick = joystick;
         tankController.SetBaseValues(friendlyTanks.tankConfigurations[0]);
         return tankController;
