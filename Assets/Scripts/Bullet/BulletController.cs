@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
@@ -16,14 +14,14 @@ public class BulletController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         EnemyController enemyController = collision.gameObject.GetComponent<EnemyController>();
-        TankController tankController = collision.gameObject.GetComponent<TankController>();
+        PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
         if (enemyController)
         {
             enemyController.TakeDamage(damage);
         }
-        else if (tankController)
+        else if (playerController)
         {
-            tankController.TakeDamage(damage);
+            playerController.TakeDamage(damage);
         }
         Destroy(gameObject);
     }

@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e00683185b8b0647accb4280f8e0775, type: 3}
-  m_Name: Enemy Red Slow
+  m_Name: Enemy Red Medium
   m_EditorClassIdentifier: 
-  tankType: 2
   tankColor: 2
-  speed: 10
-  health: 150
-  attack: 50
+  speed: 20
+  health: 100
+  attack: 20

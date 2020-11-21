@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TankService : MonoSingletonGeneric<TankService>
 {
@@ -10,10 +8,14 @@ public class TankService : MonoSingletonGeneric<TankService>
     private TankConfigurations friendlyTanks;
     [SerializeField]
     private TankConfigurations enemyTanks;
+    [SerializeField]
+    private CameraController mainCamera;
+    [SerializeField]
+    private TankSpawner tankSpawner;
 
     [Header("Player Tank Object")]
     [SerializeField]
-    private TankController friendlyTankModel;
+    private PlayerController friendlyTankModel;
     [SerializeField]
     private EnemyController enemyTankModel;
 
@@ -21,17 +23,23 @@ public class TankService : MonoSingletonGeneric<TankService>
     {
         base.Awake();
         //
-        TankController tc=TankService.Instance.GetFriendlyTank();
+        PlayerController tc=TankService.Instance.GetFriendlyTank();
+        foreach(int x in Enumerable.Range(0, 5))
+        {
+            EnemyController enemy = GetEnemyTank();
+            tankSpawner.RespawnTank(enemy);
+        }
         
        
     }
 
-    public TankController GetFriendlyTank()
+    public PlayerController GetFriendlyTank()
     {
-        TankController tankController = Instantiate<TankController>(friendlyTankModel, Vector3.zero, Quaternion.identity);
-        tankController.joystick = joystick;
-        tankController.SetBaseValues(friendlyTanks.tankConfigurations[0]);
-        return tankController;
+        PlayerController playerController = Instantiate<PlayerController>(friendlyTankModel, new Vector3(0,10,0), Quaternion.identity);
+        playerController.joystick = joystick;
+        mainCamera.target = playerController;
+        playerController.SetBaseValues(friendlyTanks.tankConfigurations[0]);
+        return playerController;
 
     }
     public EnemyController GetEnemyTank()
@@ -41,5 +49,21 @@ public class TankService : MonoSingletonGeneric<TankService>
         int tankType = Random.Range(0,enemyTanks.tankConfigurations.Length-1);
         enemyController.SetBaseValues(enemyTanks.tankConfigurations[tankType]);
         return enemyController;
+    }
+    
+    public PlayerController RespawnPlayer(PlayerController playerController)
+    {
+        Destroy(playerController.gameObject);
+        PlayerController newTank = GetFriendlyTank();
+        tankSpawner.RespawnTank(newTank);
+        return playerController;
+    }
+
+    public EnemyController RespawnEnemy(EnemyController enemy)
+    {
+        Destroy(enemy.gameObject);
+        EnemyController newTank = GetEnemyTank();
+        tankSpawner.RespawnTank(newTank);
+        return enemy;
     }
 }

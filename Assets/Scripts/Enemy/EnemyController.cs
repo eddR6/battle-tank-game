@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
@@ -33,12 +31,20 @@ public class EnemyController : MonoBehaviour
 
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+        if (playerController != null)
+        {
+            playerController.TakeDamage(100);
+        }
+    }
     public void TakeDamage(int damage)
     {
         health = health - damage;
         if (health <= 0)
         {
-            Destroy(gameObject);
+            TankService.Instance.RespawnEnemy(this);
         }
     }
 }
