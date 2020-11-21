@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TankController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public Joystick joystick;
 
@@ -17,6 +17,8 @@ public class TankController : MonoBehaviour
     private ParticleSystem tankExplosion;
     [SerializeField]
     private MeshRenderer[] meshes;
+    [SerializeField]
+    private GameObject tankRenderer;
 
     public void SetBaseValues(TankScriptableObjects configs)
     {
@@ -66,10 +68,7 @@ public class TankController : MonoBehaviour
     }
     public void ToggleMesh(bool toggle)
     {
-        foreach (MeshRenderer mesh in meshes)
-         {
-            mesh.enabled = toggle;
-         }
+        tankRenderer.SetActive(toggle);
     }
     public void TakeDamage(int damage)
     {
@@ -84,7 +83,8 @@ public class TankController : MonoBehaviour
     }
     IEnumerator DeathEffect()
     {
-        yield return new WaitForSeconds(2f);
-        TankSpawner.RespawnTank(this);
+        this.enabled = false;
+        yield return new WaitForSeconds(tankExplosion.main.duration);
+        TankService.Instance.RespawnPlayer(this);
     }
 }

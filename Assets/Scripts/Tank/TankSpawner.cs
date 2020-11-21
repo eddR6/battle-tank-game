@@ -1,41 +1,42 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TankSpawner : MonoBehaviour
 {
-    public GameObject hh;
-    public LayerMask layer;
-    public float chd;
     [SerializeField]
-    private SpawnPoints spawnPointsArray;
-    private static SpawnPoints spawnPoints;
-    private void Start()
+    private float xLower;
+    [SerializeField]
+    private float xUpper;
+    [SerializeField]
+    private float zLower;
+    [SerializeField]
+    private float zUpper;
+
+    public void RespawnTank(PlayerController playerController)
     {
-        spawnPoints = spawnPointsArray;
+        playerController.transform.position = GetSpawnPoint();
+    }
+    public void RespawnTank(EnemyController enemyController)
+    {
+        enemyController.transform.position = GetSpawnPoint();
+    }
+    private Vector3 GetRandomPoint()
+    {
+        float x = Random.Range(xLower, xUpper);
+        float z = Random.Range(zLower, zUpper);
+        Vector3 point = new Vector3(x, 0, z);
+        return point;
     }
 
-    public static void RespawnTank(TankController tankController)
+    private Vector3 GetSpawnPoint()
     {
-       foreach(Vector3 point in spawnPoints.vectorPoints)
+        while (true)
         {
+            Vector3 point = GetRandomPoint();
             Collider[] colliders = Physics.OverlapSphere(point, 5f);
-            bool hasEnemy = false;
-            foreach (Collider collider in colliders)
+            if (colliders.Length <= 1)
             {
-                if (collider.transform.gameObject.GetComponent<EnemyController>()!=null)
-                {
-                    hasEnemy = true;
-                    break;
-                }
-            }
-            if (!hasEnemy)
-            {
-                tankController.transform.position = point;
-                tankController.ToggleMesh(true);
-                break;
+                return point;
             }
         }
     }
-    
 }
