@@ -4,11 +4,13 @@ public class BulletController : MonoBehaviour
 {
     public int damage;
     public float speed;
-
-    private void Start()
+    private Rigidbody rb;
+    int i = 0;
+    private void Awake()
     {
-        Rigidbody rb =gameObject.GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * speed);
+        rb = gameObject.GetComponent<Rigidbody>();
+        Debug.Log( i);
+        i++;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -24,5 +26,11 @@ public class BulletController : MonoBehaviour
             playerController.TakeDamage(damage);
         }
         Destroy(gameObject);
+    }
+    public void LaunchBullet()
+    {
+        rb.AddForce(transform.forward * speed);
+        Debug.Log("here" + i);
+        i++;
     }
 }

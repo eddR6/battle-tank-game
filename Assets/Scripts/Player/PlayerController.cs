@@ -62,14 +62,18 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            BulletController bulletController = BulletManager.Instance.LaunchBullet(muzzleTransform);
+            BulletController bulletController = BulletManager.Instance.GetBullet();
             bulletController.damage = attack;
+            bulletController.transform.position = muzzleTransform.position;
+            bulletController.transform.rotation = muzzleTransform.rotation;
+            bulletController.LaunchBullet();
         }
     }
     public void ToggleMesh(bool toggle)
     {
         tankRenderer.SetActive(toggle);
     }
+
     public void TakeDamage(int damage)
     {
         health = health - damage;
@@ -85,6 +89,6 @@ public class PlayerController : MonoBehaviour
     {
         this.enabled = false;
         yield return new WaitForSeconds(tankExplosion.main.duration);
-        TankService.Instance.RespawnPlayer(this);
+        TankService.Instance.RespawnTank(this);
     }
 }

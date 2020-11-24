@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
@@ -7,10 +8,20 @@ public class EnemyController : MonoBehaviour
     private int health;
     private int attack;
     private TankColor tankColor;
+    [SerializeField]
+    private Transform muzzleTransform;
+    [SerializeField]
+    private ParticleSystem tankExplosion;
     [Header("Renderer Parts")]
     [SerializeField]
     private MeshRenderer[] meshes;
+    [SerializeField]
+    private GameObject tankRenderer;
 
+    private void Update()
+    {
+        FireBullet();
+    }
     public void SetBaseValues(TankScriptableObjects configs)
     {
         speed = configs.speed;
@@ -39,12 +50,38 @@ public class EnemyController : MonoBehaviour
             playerController.TakeDamage(100);
         }
     }
+
+    public void ToggleMesh(bool toggle)
+    {
+        tankRenderer.SetActive(toggle);
+    }
+
     public void TakeDamage(int damage)
     {
         health = health - damage;
         if (health <= 0)
         {
-            TankService.Instance.RespawnEnemy(this);
+            ToggleMesh(false);
+            tankExplosion.Play();
+            StartCoroutine(DeathEffect());
         }
+    }
+    private void FireBullet()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            BulletController bulletController = BulletManager.Instance.GetBullet();
+            bulletController.damage = attack;
+            bulletController.transform.position = muzzleTransform.position;
+            bulletController.transform.rotation = muzzleTransform.rotation;
+            bulletController.LaunchBullet();
+        }
+    }
+
+    IEnumerator DeathEffect()
+    {
+        this.enabled = false;
+        yield return new WaitForSeconds(tankExplosion.main.duration);
+        TankService.Instance.RespawnTank(this);
     }
 }

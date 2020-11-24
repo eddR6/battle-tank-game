@@ -345,6 +345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletModel: {fileID: 6542140410660258350, guid: a4456e0a2b0ee4c4086dfbd6584923c2,
     type: 3}
+  defaultBulletSpawn: {x: 0, y: 20, z: 0}
 --- !u!1 &734051886
 GameObject:
   m_ObjectHideFlags: 0

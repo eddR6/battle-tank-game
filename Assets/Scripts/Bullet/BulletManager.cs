@@ -4,13 +4,15 @@ public class BulletManager : MonoSingletonGeneric<BulletManager>
 {
     [SerializeField]
     private BulletController bulletModel;
+    [SerializeField]
+    private Vector3 defaultBulletSpawn;
     protected override void Awake()
     {
         base.Awake();
     }
-    public BulletController LaunchBullet(Transform parentTransform)
+    public BulletController GetBullet()
     {
-        BulletController bullet = Instantiate<BulletController>(bulletModel, parentTransform.position, parentTransform.rotation);
+        BulletController bullet = Instantiate<BulletController>(bulletModel,defaultBulletSpawn, Quaternion.identity);
         return bullet;    
     }
 }

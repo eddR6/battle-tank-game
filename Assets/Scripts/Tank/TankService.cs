@@ -51,7 +51,7 @@ public class TankService : MonoSingletonGeneric<TankService>
         return enemyController;
     }
     
-    public PlayerController RespawnPlayer(PlayerController playerController)
+    public PlayerController RespawnTank(PlayerController playerController)
     {
         Destroy(playerController.gameObject);
         PlayerController newTank = GetFriendlyTank();
@@ -59,7 +59,7 @@ public class TankService : MonoSingletonGeneric<TankService>
         return playerController;
     }
 
-    public EnemyController RespawnEnemy(EnemyController enemy)
+    public EnemyController RespawnTank(EnemyController enemy)
     {
         Destroy(enemy.gameObject);
         EnemyController newTank = GetEnemyTank();
