@@ -11,14 +11,11 @@ public class TankSpawner : MonoBehaviour
     [SerializeField]
     private float zUpper;
 
-    public void RespawnTank(PlayerController playerController)
+    public void RespawnTank(TankController tankController)
     {
-        playerController.transform.position = GetSpawnPoint();
+        tankController.transform.position = GetSpawnPoint();
     }
-    public void RespawnTank(EnemyController enemyController)
-    {
-        enemyController.transform.position = GetSpawnPoint();
-    }
+
     private Vector3 GetRandomPoint()
     {
         float x = Random.Range(xLower, xUpper);

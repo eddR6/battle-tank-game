@@ -51,19 +51,21 @@ public class TankService : MonoSingletonGeneric<TankService>
         return enemyController;
     }
     
-    public PlayerController RespawnTank(PlayerController playerController)
+    public TankController RespawnTank(TankController tankController)
     {
-        Destroy(playerController.gameObject);
-        PlayerController newTank = GetFriendlyTank();
+        TankController newTank;
+        if (tankController.gameObject.GetComponent<PlayerController>() != null)
+        {
+            newTank = GetFriendlyTank();
+        }
+        else
+        {
+            newTank = GetEnemyTank();
+        }
+        Destroy(tankController.gameObject);
         tankSpawner.RespawnTank(newTank);
-        return playerController;
+        return newTank;
     }
 
-    public EnemyController RespawnTank(EnemyController enemy)
-    {
-        Destroy(enemy.gameObject);
-        EnemyController newTank = GetEnemyTank();
-        tankSpawner.RespawnTank(newTank);
-        return enemy;
-    }
+    
 }
