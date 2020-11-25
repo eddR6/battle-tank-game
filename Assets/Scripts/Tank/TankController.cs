@@ -13,14 +13,13 @@ public class TankController : MonoBehaviour,IDamagable
     [SerializeField]
     protected Transform muzzleTransform;
     //
-    [SerializeField]
-    protected ParticleSystem tankExplosion;
-    //
     [Header("Renderer Parts")]
     [SerializeField]
     protected MeshRenderer[] meshes;
     [SerializeField]
     protected GameObject tankRenderer;
+    [SerializeField]
+    protected BoxCollider boxCollider;
 
     public void SetBaseValues(TankScriptableObjects configs)
     {
@@ -47,10 +46,11 @@ public class TankController : MonoBehaviour,IDamagable
         tankRenderer.SetActive(toggle);
     }
 
-    IEnumerator DeathEffect()
+    IEnumerator DeathEffect(ParticleSystem explosion)
     {
         this.enabled = false;
-        yield return new WaitForSeconds(tankExplosion.main.duration);
+        yield return new WaitForSeconds(explosion.main.duration);
+        Destroy(explosion.gameObject);
         TankService.Instance.RespawnTank(this);
     }
 
@@ -60,8 +60,11 @@ public class TankController : MonoBehaviour,IDamagable
         if (health <= 0)
         {
             ToggleMesh(false);
-            tankExplosion.Play();
-            StartCoroutine(DeathEffect());
+            ParticleSystem explosion = ExplosionService.Instance.GetTankExplosion();
+            explosion.transform.position = gameObject.transform.position;
+            explosion.Play();
+            boxCollider.enabled = false;
+            StartCoroutine(DeathEffect(explosion));
 
         }
     }

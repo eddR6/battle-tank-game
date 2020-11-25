@@ -95,8 +95,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
-  speed: 400
+  speed: 1000
+  bulletTime: 5
   rb: {fileID: 8976503559147685822}
+  boxCollider: {fileID: 8652850566529439712}
+  meshRenderer: {fileID: 5765457831140299165}
 --- !u!54 &8976503559147685822
 Rigidbody:
   m_ObjectHideFlags: 0

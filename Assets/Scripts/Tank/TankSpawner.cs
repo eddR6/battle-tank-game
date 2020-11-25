@@ -10,6 +10,8 @@ public class TankSpawner : MonoBehaviour
     private float zLower;
     [SerializeField]
     private float zUpper;
+    [SerializeField]
+    private float safeRadius;
 
     public void RespawnTank(TankController tankController)
     {
@@ -29,7 +31,7 @@ public class TankSpawner : MonoBehaviour
         while (true)
         {
             Vector3 point = GetRandomPoint();
-            Collider[] colliders = Physics.OverlapSphere(point, 5f);
+            Collider[] colliders = Physics.OverlapSphere(point, safeRadius);
             if (colliders.Length <= 1)
             {
                 return point;
