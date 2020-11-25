@@ -1,28 +1,59 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
     public int damage;
     public float speed;
+    [SerializeField]
+    private float bulletTime;
+    [SerializeField]
+    private Rigidbody rb;
+    [SerializeField]
+    private BoxCollider boxCollider;
+    [SerializeField]
+    private MeshRenderer meshRenderer;
 
     private void Start()
     {
-        Rigidbody rb =gameObject.GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * speed);
+        StartCoroutine(BulletLifeTime());   
+    }
+
+    IEnumerator BulletLifeTime()
+    {
+        yield return new  WaitForSeconds(bulletTime);
+        BulletExplosion();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        EnemyController enemyController = collision.gameObject.GetComponent<EnemyController>();
-        PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
-        if (enemyController)
+        IDamagable damagable = collision.gameObject.GetComponent<IDamagable>();
+        if (damagable!=null)
         {
-            enemyController.TakeDamage(damage);
+            damagable.TakeDamage(damage);
         }
-        else if (playerController)
-        {
-            playerController.TakeDamage(damage);
-        }
+        BulletExplosion();
+    }
+
+    private void BulletExplosion()
+    {
+        ParticleSystem explosion = ExplosionService.Instance.GetBulletExplosion();
+        boxCollider.enabled = false;
+        explosion.transform.position = gameObject.transform.position;
+        explosion.Play();
+        meshRenderer.enabled = false;
+        StartCoroutine(CollisionEffect(explosion));
+    }
+
+    IEnumerator CollisionEffect(ParticleSystem explosion)
+    {
+        yield return new WaitForSeconds(explosion.main.duration);
+        Destroy(explosion.gameObject);
         Destroy(gameObject);
+    }
+
+    public void LaunchBullet()
+    {
+        rb.AddForce(transform.forward * speed);
     }
 }

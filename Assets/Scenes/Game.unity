@@ -300,6 +300,7 @@ MonoBehaviour:
   xUpper: 40
   zLower: -40
   zUpper: 40
+  safeRadius: 5
 --- !u!1 &510361143
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,6 +346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletModel: {fileID: 6542140410660258350, guid: a4456e0a2b0ee4c4086dfbd6584923c2,
     type: 3}
+  defaultBulletSpawn: {x: 0, y: 20, z: 0}
 --- !u!1 &734051886
 GameObject:
   m_ObjectHideFlags: 0
@@ -819,8 +821,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1593905211}
+  - component: {fileID: 1593905212}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: ExplosionService
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -840,6 +843,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1593905212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593905210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d97cbec8e075646bbf1269b780a6f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tankExplosion: {fileID: 19874418, guid: ee49a9a8678ecf8468eb488e1ac8d42b, type: 3}
+  bulletExplosion: {fileID: 19807510, guid: 89e78efe92dfe5a42837b392cdb0bf9e, type: 3}
 --- !u!1 &1656915001
 GameObject:
   m_ObjectHideFlags: 0
