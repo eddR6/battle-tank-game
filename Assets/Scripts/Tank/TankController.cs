@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TankController : MonoBehaviour,IDamagable
 {
-    protected float speed;
+    protected float speed; 
     protected float rotationSpeed=150f;
     protected int health;
     protected int attack;
@@ -20,6 +20,11 @@ public class TankController : MonoBehaviour,IDamagable
     protected GameObject tankRenderer;
     [SerializeField]
     protected BoxCollider boxCollider;
+
+    public float GetSpeed()
+    {
+        return speed;
+    }
 
     public void SetBaseValues(TankScriptableObjects configs)
     {
@@ -69,7 +74,7 @@ public class TankController : MonoBehaviour,IDamagable
         }
     }
 
-    protected void FireBullet()
+    public void FireBullet()
     {
         BulletController bulletController = BulletManager.Instance.GetBullet();
         bulletController.damage = attack;

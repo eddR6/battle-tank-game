@@ -3,6 +3,30 @@ using UnityEngine;
 
 public class EnemyController : TankController
 {
+    private EnemyState currentState;
+
+    [SerializeField]
+    private PatrolState patrolState;
+    [SerializeField]
+    private AttackState attackState;
+
+    public void SetState(EnemyState state)
+    {
+        if (currentState != null)
+        {
+            currentState.OnStateExit();
+        }
+        currentState = state;
+        if (currentState != null)
+        {
+            currentState.OnStateEnter();
+        }
+    }
+
+    private void Start()
+    {
+        SetState(patrolState);
+    }
 
     private void Update()
     {
@@ -10,6 +34,8 @@ public class EnemyController : TankController
         {
             FireBullet();
         }
+        //
+        currentState.Tick();
     }
 
     private void OnCollisionEnter(Collision collision)
