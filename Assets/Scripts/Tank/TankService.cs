@@ -19,6 +19,8 @@ public class TankService : MonoSingletonGeneric<TankService>
     [SerializeField]
     private EnemyController enemyTankModel;
 
+    private PlayerController currentPlayer;
+
     protected override void Awake()
     {
         base.Awake();
@@ -39,6 +41,7 @@ public class TankService : MonoSingletonGeneric<TankService>
         playerController.joystick = joystick;
         mainCamera.target = playerController;
         playerController.SetBaseValues(friendlyTanks.tankConfigurations[0]);
+        currentPlayer = playerController;
         return playerController;
 
     }
@@ -65,6 +68,11 @@ public class TankService : MonoSingletonGeneric<TankService>
         Destroy(tankController.gameObject);
         tankSpawner.RespawnTank(newTank);
         return newTank;
+    }
+
+    public PlayerController GetCurrentPlayer()
+    {
+        return currentPlayer != null ? currentPlayer : null;
     }
 
     
