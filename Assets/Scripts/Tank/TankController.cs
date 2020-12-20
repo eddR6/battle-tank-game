@@ -74,7 +74,7 @@ public class TankController : MonoBehaviour,IDamagable
         }
     }
 
-    public void FireBullet()
+    public virtual void FireBullet()
     {
         BulletController bulletController = BulletManager.Instance.GetBullet();
         bulletController.damage = attack;

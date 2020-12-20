@@ -35,7 +35,6 @@ public class AttackState : EnemyState
         Quaternion rotation = Quaternion.LookRotation(direction);
         rotation = new Quaternion(0, rotation.y, 0, rotation.w);
         turretTransform.rotation = Quaternion.Lerp(turretTransform.rotation, rotation, rotationSpeed * Time.deltaTime);
-        Debug.Log(Mathf.Abs(Quaternion.Angle(turretTransform.rotation,rotation)));
         if (Mathf.Abs(Quaternion.Angle(turretTransform.rotation, rotation))<=15)
         {
             FireBullet();

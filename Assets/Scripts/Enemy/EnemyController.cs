@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyController : TankController
@@ -45,6 +47,11 @@ public class EnemyController : TankController
         {
             playerController.TakeDamage(100);
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameEvents.InvokeEnemyOnDeath();
     }
 
 }
