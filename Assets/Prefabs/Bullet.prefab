@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
-  speed: 1000
+  speed: 2000
   bulletTime: 5
   rb: {fileID: 8976503559147685822}
   boxCollider: {fileID: 8652850566529439712}

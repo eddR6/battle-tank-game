@@ -25,4 +25,10 @@ public class PlayerController : TankController
         transform.position = transform.position + transform.forward*speed * vertical * Time.deltaTime;
         transform.Rotate(Vector3.up*rotationSpeed*Time.deltaTime*horizontal);
     }
+
+    public override void FireBullet()
+    {
+        base.FireBullet();
+        GameEvents.InvokeBulletsFired();
+    }
 }
